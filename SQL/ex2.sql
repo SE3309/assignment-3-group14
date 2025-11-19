@@ -57,3 +57,53 @@ CREATE TABLE CustomerProfile (
 );
 
 Describe CustomerProfile;
+
+CREATE TABLE Inventory (
+    inventoryID CHAR(36) NOT NULL PRIMARY KEY DEFAULT (UUID()),
+    status VARCHAR(20) NOT NULL,
+    dateReceived TIMESTAMP NOT NULL,
+    dateSold TIMESTAMP NULL,
+    storeID CHAR(36) NOT NULL,
+    FOREIGN KEY (storeID) REFERENCES Location(storeID)
+);
+
+describe Inventory;
+
+CREATE TABLE Plan (
+    planID CHAR(36) NOT NULL PRIMARY KEY DEFAULT (UUID()),
+    name VARCHAR(50) NOT NULL,
+    dataAmount INT NULL,
+    callMinutes INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
+ describe Plan;
+ 
+CREATE TABLE Payment (
+    creditCardNumber CHAR(16) NOT NULL PRIMARY KEY,
+    cvv CHAR(4) NOT NULL,
+    expirationDate CHAR(5) NOT NULL,
+    billingAddress VARCHAR(255) NOT NULL,
+    customerID CHAR(36) NOT NULL,
+    FOREIGN KEY (customerID) REFERENCES CustomerProfile(customerID)
+); 
+describe Payment; 
+
+CREATE TABLE Sale (
+    saleID CHAR(36) NOT NULL PRIMARY KEY DEFAULT (UUID()),
+    saleDate DATE NOT NULL DEFAULT (CURRENT_DATE),
+    saleTime TIME NOT NULL DEFAULT (CURRENT_TIME),
+    customerID CHAR(36) NOT NULL,
+    employeeID CHAR(36) NOT NULL,
+    storeID CHAR(36) NOT NULL,
+    creditCardNumber CHAR(16) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    discount DECIMAL(10,2) NOT NULL,
+    taxTotal DECIMAL(10,2) NOT NULL,
+    grandTotal DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (customerID) REFERENCES CustomerProfile(customerID),
+    FOREIGN KEY (employeeID) REFERENCES EmployeeProfile(employeeID),
+    FOREIGN KEY (storeID) REFERENCES Location(storeID),
+    FOREIGN KEY (creditCardNumber) REFERENCES Payment(creditCardNumber)
+);
+
+describe Sale;
