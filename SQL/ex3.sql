@@ -7,20 +7,6 @@ SELECT * FROM Location;
 
 INSERT INTO Location (storeName, street, city, province, postalCode, callAddress)
 SELECT 
-    CONCAT(city, ' Analyst Office'),
-    '200 Data Drive',
-    city,
-    province,
-    CONCAT(LEFT(postalCode,3), '9ZZ'),
-    '1-800-555-ANALYST'
-FROM Location
-GROUP BY city, province
-HAVING COUNT(*) > 1;
-
-SELECT * FROM Location;
-
-INSERT INTO Location (storeName, street, city, province, postalCode, callAddress)
-SELECT 
     CONCAT(province, ' Regional HQ'),
     '100 Corporate Blvd',
     city,
@@ -32,5 +18,19 @@ FROM (
     FROM Location
     GROUP BY province
 ) AS provs;
+
+SELECT * FROM Location;
+
+INSERT INTO Location (storeName, street, city, province, postalCode, callAddress)
+SELECT 
+    CONCAT(city, ' Analyst Office'),
+    '200 Data Drive',
+    city,
+    province,
+    CONCAT(LEFT(postalCode,3), '9ZZ'),
+    '1-800-555-ANALYST'
+FROM Location
+GROUP BY city, province
+HAVING COUNT(*) > 1;
 
 SELECT * FROM Location;
