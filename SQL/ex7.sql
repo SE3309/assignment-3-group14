@@ -1,9 +1,7 @@
 -- ex7.sql
 USE telecom;
 
---------------------------------------------------
 -- View 1: Customer sales summary
---------------------------------------------------
 
 CREATE VIEW CustomerSalesSummary AS
 SELECT
@@ -23,9 +21,7 @@ ORDER BY totalSpent DESC
 LIMIT 10;
 
 
---------------------------------------------------
 -- View 2: Store inventory by status
---------------------------------------------------
 
 CREATE VIEW StoreInventoryView AS
 SELECT
@@ -44,9 +40,7 @@ ORDER BY storeName, status
 LIMIT 10;
 
 
---------------------------------------------------
 -- Test updatability: try modifying the views
---------------------------------------------------
 
 -- Attempt 1: insert into CustomerSalesSummary
 INSERT INTO CustomerSalesSummary (customerID, fullName, numSales, totalSpent)
