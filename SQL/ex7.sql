@@ -41,6 +41,7 @@ FROM StoreInventoryView
 ORDER BY storeName, invStatus
 LIMIT 10;
 
+-- this is for testing purposes (will not run)
 INSERT INTO CustomerSalesSummary (customerID, fullName, numSales, totalSpent)
 VALUES ('dummy-id', 'Dummy User', 1, 100.00);
 
